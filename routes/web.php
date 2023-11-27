@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +29,13 @@ Route::post('/articles/add', [ArticleController::class, 'create']);
 
 Route::get('/articles/delete/{id}', [ArticleController::class, 'delete']);
 
+Route::post('/comments/add', [CommentController::class, 'create']);
+Route::get('/comments/delete/{id}', [CommentController::class, 'delete']);
+
+Route::get('/admin/category_add', [CategoryController::class, 'add']);
+Route::post('/admin/category_add', [CategoryController::class, 'create']);
+
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [ArticleController::class, 'index']);
+Route::get('/admin', [HomeController::class, 'index']);

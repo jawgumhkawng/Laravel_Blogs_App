@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\ArticleCreateRequest;
+use App\Models\Category;
 
 class ArticleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'detail']);
+    }
+   
     public function index()
     {   
         $data = Article::latest()->paginate(5);
@@ -30,13 +37,10 @@ class ArticleController extends Controller
     
     public function add()
     {
-        $data = [
-            [ "id" => 1, "name" => "News" ],
-            [ "id" => 2, "name" => "Tech" ],
-            ];
-        return view('articles.add', [
-            'categories' => $data
-            ]);
+       $categories = Category::all();
+
+       return view('/articles.add',  compact('categories'));
+
     }
 
 
@@ -58,6 +62,7 @@ class ArticleController extends Controller
         $article = new Article;
         $article->title = request()->title;
         $article->body = request()->body;
+        $article->user_id = auth()->user()->id;
         $article->category_id = request()->category_id;
 
         $imageName = date('YmdHis'). "." .request()->image->getClientOriginalExtension();
@@ -73,7 +78,13 @@ class ArticleController extends Controller
 
     public function delete($id)
     {
-        $articles = Article::find($id);
+         $articles = Article::find($id);
+
+        if(Gate::denies('article-delete', $articles)) {
+
+        return view()->with('Auth', 'Unauthorize'); 
+
+        }   
 
         $articles->delete();
 

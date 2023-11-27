@@ -13,7 +13,7 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
-    {{-- css --}}
+
 
     
 
@@ -21,19 +21,24 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
     <style>
-        @media (min-width: 576px) {
+    @media (min-width: 576px) {
     .img img {
         width: 190px;
         float: right;
         height: 190px; 
     }
   
-}
+    }
+    .bg-derk {
+        background: linear-gradient(to top right, #000, #1c1917);
+    }
+
+
     </style>
 </head>
-<body>
+<body class="bg-derk" >
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm " style="position: sticky; top:0px; z-index:4">
+        <nav class="navbar navbar-expand-md navbar-dark  bg-derk shadow-sm " style="position: sticky; top:0px; z-index:4">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -44,10 +49,18 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+                   @auth
                     <ul class="navbar-nav me-auto">
-                        <a href="{{ url("/articles/add") }}" class="btn btn-info"> Add New</a>
+                        <a href="{{ url("/articles/add") }}" class="btn btn-info"  data-toggle="tooltip" title="Hooray!"> Add New</a>
                     </ul>
-
+                    
+                   @endauth
+                    @guest
+                     <ul class="navbar-nav me-auto">
+                        <a href="#" class="text-info text-decoration-none"  data-toggle="tooltip" title="Hooray!">Hello {{ Request::segment(1) == 'admin' ? 'Admin' : 'User' }}</a>
+                    </ul>
+                    @endguest
+                  
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
@@ -63,6 +76,7 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
+                            
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -91,5 +105,16 @@
             @yield('content')
         </main>
     </div>
+<script>
+    const triggerTabList = document.querySelectorAll('#pills button')
+triggerTabList.forEach(triggerEl => {
+  const tabTrigger = new bootstrap.Tab(triggerEl)
+
+  triggerEl.addEventListener('click', event => {
+    event.preventDefault()
+    tabTrigger.show()
+  })
+})
+</script>
 </body>
 </html>

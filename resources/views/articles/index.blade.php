@@ -2,8 +2,8 @@
 
 @section('content')
 
-<div class="container">
-{{ $articles->links() }}
+<div class="container ">
+<div class="text-info"> {{ $articles->links() }}</div>
 
 @if (session('Created'))
 
@@ -22,27 +22,29 @@
     </div>      
 
 @endif
-    @foreach ($articles as $article )
+    
 
-    <div class="card mb-2 shadow">
+    <div class="card mb-2 shadow bg-derk text-white">
         <div class="card-body">
-            <div class="col-12  img">
+            @foreach ($articles as $article )
+            <div class="col-12  img mt-3 mb-5">
                 <img src="{{ url('./storage/images/'.$article->image) }}" alt="" width="100%" style="border: 1.5px solid gray; border-radius:8px" class="float-end  ">
             </div>
-           <div class="col-12 col-lg-6 col-md-6" >
+           <div class="col-12 col-lg-6 col-md-6 mb-5 " >
             
              <h5 class="card-title">{{ $article->title }}</h5>
             
-                <div class="card-subtitle mb-2 text-muted small">{{ $article->created_at->diffForHumans() }}</div>
+                <div class="card-subtitle mb-2 text-info small">{{ $article->created_at->diffForHumans() }}</div>
 
-                <p class="card-text">{{ $article->body }}</p><br>
+                <p class="card-text">{{ $article->body }} <a href="{{ url("/articles/detail/$article->id") }}" class="text-decoration-none ">..see more  </a></p><br>
 
-                <a href="{{ url("/articles/detail/$article->id") }}" class="btn btn-success ">View detail  &raquo;</a>
-                </div>
-           </div>
-    </div>
+               
+             </div>
+             <hr>
    
     @endforeach
+               </div>
+    </div>
 </div>
 
 @endsection
