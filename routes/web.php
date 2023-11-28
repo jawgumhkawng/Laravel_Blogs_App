@@ -6,6 +6,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,8 @@ Route::get('/comments/delete/{id}', [CommentController::class, 'delete']);
 
 Route::get('/admin/category_add', [CategoryController::class, 'add']);
 Route::post('/admin/category_add', [CategoryController::class, 'create']);
+
+Route::post('/articles', [UserController::class, 'upload'])->name('articles.upload');
 
 Auth::routes();
 

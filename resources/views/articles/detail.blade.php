@@ -5,7 +5,7 @@
 <div class="container bg-derk"> 
     @if (session('CmtCreate'))
 
-    <div class="alert alert-info alert-dismissible fade show" role="alert" style="transition: all 1s ease;">
+    <div class="alert alert-info alert-dismissible fade show"  role="alert" style="transition: all 1s ease; user-select:none;">
         <strong>Created!</strong>{{session('CmtCreate')}}
         <button type="button" class="btn-close" data-bs-dismiss="alert" style="border: opx" aria-label="Close"></button>
     </div>      
@@ -14,7 +14,7 @@
 
       @if (session('Auth'))
 
-    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="transition: all 1s ease;">
+    <div class="alert alert-danger alert-dismissible fade show"  role="alert" style="transition: all 1s ease;">
         <strong>Created!</strong>{{session('Auth')}}
         <button type="button" class="btn-close" data-bs-dismiss="alert" style="border: opx" aria-label="Close"></button>
     </div>      
@@ -23,13 +23,13 @@
 
         @if (session('CmtDel'))
 
-    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="transition: all 1s ease;">
-        <strong>Deleted!</strong>{{session('CmtDel')}}
+    <div class="alert alert-danger alert-dismissible fade show"  role="alert" style="transition: all 1s ease;">
+        <strong >Deleted!</strong>{{session('CmtDel')}}
         <button type="button" class="btn-close" data-bs-dismiss="alert" style="border: opx" aria-label="Close"></button>
     </div>      
 
     @endif
-    <div class="card mb-2 shadow bg-derk text-white" >
+    <div class="card mb-2 shadow bg-derk text-white"  style=" user-select:none;">
             <div class="card-body">
                 <div class="col-12  img">
                     <img src="{{ url('./storage/images/'.$articles->image) }}" alt="" width="100%" style="border: 1.5px solid gray; border-radius:8px" class="float-end  ">
@@ -54,7 +54,7 @@
             </div>
     </div>
 
-    <ul class="list-group mb-3 shadow ">
+    <ul class="list-group mb-3 shadow " style=" user-select:none;">
         <li class="list-group-item active bg-derk">
             <b>Comment ({{ count($articles->comments) }})</b>
         </li>
@@ -80,7 +80,7 @@
         <form action="{{ url('/comments/add') }}" class="bg-derk" method="post">
          @csrf
         <input type="hidden" name="article_id" value="{{ $articles->id }}">
-        <textarea type="text" name="content" placeholder="New Comment" class="form-control mb-2" ></textarea>
+        <textarea type="text"  name="content" placeholder="New Comment" class="form-control mb-2 bg-derk text-white" ></textarea>
         <input type="submit" value="Add Comment" class="btn btn-secondary" name="" id="">
         
         </form>

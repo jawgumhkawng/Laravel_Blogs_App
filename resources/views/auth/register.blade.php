@@ -62,13 +62,13 @@
                         </div>
 
                         
-                        <div class="row mb-3">
+                        {{-- <div class="row mb-3">
                             <label for="image" class="col-md-4 col-form-label text-md-end">{{ __('Profile Image') }}</label>
 
                             <div class="col-md-6">
                                 <input id="image" type="file" class="form-control" name="image" required >
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">

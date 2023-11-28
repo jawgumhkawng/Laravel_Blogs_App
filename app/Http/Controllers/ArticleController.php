@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\ArticleCreateRequest;
-use App\Models\Category;
 
 class ArticleController extends Controller
 {
@@ -17,12 +19,11 @@ class ArticleController extends Controller
    
     public function index()
     {   
-        $data = Article::latest()->paginate(5);
-
+        $articles = Article::latest()->paginate(5);
+        $id = Auth::user()->id;
+        $user = User::find($id);
         
-        return view('/articles.index',[
-            'articles' => $data
-        ]);
+        return view('/articles.index',compact('articles','user'));
     }
 
     public function detail($id)

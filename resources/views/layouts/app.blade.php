@@ -13,7 +13,8 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
-
+    {{-- font awsome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     
 
@@ -27,8 +28,10 @@
         float: right;
         height: 190px; 
     }
+   
   
     }
+   
     .bg-derk {
         background: linear-gradient(to top right, #000, #1c1917);
     }
@@ -106,15 +109,24 @@
         </main>
     </div>
 <script>
-    const triggerTabList = document.querySelectorAll('#pills button')
-triggerTabList.forEach(triggerEl => {
-  const tabTrigger = new bootstrap.Tab(triggerEl)
+    const exampleModal = document.getElementById('exampleModal')
+if (exampleModal) {
+  exampleModal.addEventListener('show.bs.modal', event => {
+    // Button that triggered the modal
+    const button = event.relatedTarget
+    // Extract info from data-bs-* attributes
+    const recipient = button.getAttribute('data-bs-whatever')
+    // If necessary, you could initiate an Ajax request here
+    // and then do the updating in a callback.
 
-  triggerEl.addEventListener('click', event => {
-    event.preventDefault()
-    tabTrigger.show()
+    // Update the modal's content.
+    const modalTitle = exampleModal.querySelector('.modal-title')
+    const modalBodyInput = exampleModal.querySelector('.modal-body input')
+
+    // modalTitle.textContent = `New message to ${recipient}`
+    // modalBodyInput.value = recipient
   })
-})
+}
 </script>
 </body>
 </html>

@@ -1,7 +1,45 @@
-@extends('layouts.app')
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-@section('content')
-<div class="container">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+
+
+
+    
+
+    <!-- Scripts -->
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    <style>
+    @media (min-width: 576px) {
+    .img img {
+        width: 190px;
+        float: right;
+        height: 190px; 
+    }
+  
+    }
+    .bg-derk {
+        background: linear-gradient(to top right, #000, #1c1917);
+    }
+
+
+    </style>
+</head>
+<body class="">
+  
+
+<div class="container ">
      <h2>hello</h2>
  @if (session('Created'))
 
@@ -32,16 +70,19 @@
     </button>
   </li>
  
-  <li class="nav-item" role="presentation">
+  <li class="nav-item me-5" role="presentation">
     <button class="nav-link position-relative" style="border:1px solid #3c6efd" id="pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button" role="tab" aria-controls="pills-disabled" aria-selected="false" >Disabled  
 
          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
             {{ count($users) }}
-            <span class="visually-hidden">unread messages</span>
+            <span class="">new users</span>
         </span>
 
     </button>
   </li>
+  <div class="float-end d-inline ms-5"><a href="{{ url("/admin/category_add") }}" class=" btn btn-primary">Add New Category</a></div>
+
+ 
 </ul>
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
@@ -81,6 +122,7 @@
             <th>No</th>
             <th>Nmae</th>
             <th>des</th>
+            <th>category</th>
             <th>created_at</th>
            </tr>
         </thead>
@@ -91,6 +133,29 @@
                 <td>{{ $article->id  }}</td>
                 <td>{{ $article->title }}</td>
                 <td>{{ substr($article->body,0,60) }}</td>
+                <td>
+                  @if($article->category->id == 1)
+                    <span class=" {{ 'btn btn-sm btn-danger' }}">
+                    {{ $article->category->name }}
+                  </span>
+                  @elseif($article->category->id == 2)
+                     <span class=" {{ 'btn btn-sm btn-secondary' }}">
+                    {{ $article->category->name }}
+                  </span>
+                  @elseif ( $article->category->id == 3)
+                   <span class=" {{ 'btn btn-sm btn-primary' }}">
+                    {{ $article->category->name }}
+                  </span>
+                  @elseif ($article->category->id == 4)
+                   <span class=" {{ 'btn btn-sm btn-info' }}">
+                    {{ $article->category->name }}
+                  </span>
+                  @else
+                     <span class=" {{ 'btn btn-sm btn-warning' }}">
+                    {{ $article->category->name }}
+                  </span>
+                  @endif
+                  </td>
                 <td>{{ $article->created_at }}</td>
                  
             </tr>
@@ -133,4 +198,19 @@
 </div>
 </div>
 
-@endsection
+<script>
+    const triggerTabList = document.querySelectorAll('#pills button')
+triggerTabList.forEach(triggerEl => {
+  const tabTrigger = new bootstrap.Tab(triggerEl)
+
+  triggerEl.addEventListener('click', event => {
+    event.preventDefault()
+    tabTrigger.show()
+  })
+})
+
+
+
+</script>
+</body>
+</html>
