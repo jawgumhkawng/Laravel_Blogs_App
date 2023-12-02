@@ -32,16 +32,16 @@
   
     }
    
-    .bg-derk {
+    /* .bg-derk {
         background: linear-gradient(to top right, #000, #1c1917);
-    }
+    } */
 
 
     </style>
 </head>
 <body class="bg-derk" >
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark  bg-derk shadow-sm " style="position: sticky; top:0px; z-index:4">
+        <nav class="navbar navbar-expand-md navbar-light bg-white  bg-derk shadow-sm " style="position: sticky; top:0px; z-index:4">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}

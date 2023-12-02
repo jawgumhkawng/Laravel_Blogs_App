@@ -2,7 +2,6 @@
 @section('content')
 
 <div class="container">
-    <div class="h3 mt-3 mb-3">Add New form</div>
 
     @if($errors->any())
         <div class="alert alert-warning">
@@ -20,21 +19,22 @@
     
     <div class="mb-3">
         <label>Title</label>
-        <input type="text" name="title" class="form-control" >
+        <input type="text" name="title" class="form-control" value="{{ old('$article->title',$articles->title) }}">
     </div>
+
    
     <div class="mb-3">
         <label>Body</label>
-        <textarea name="body" class="form-control"></textarea>
+        <textarea name="body" class="form-control">{{ old('$article->body',$articles->body) }}</textarea>
     </div>
 
    
     <div class="mb-3">
       <label>Category</label>
         <select class="form-select" name="category_id">
-            <option value="">Select Category</option>
         @foreach($categories as $category)
-            <option value="{{ $category->id }}">
+            <option value="{{ $category->id }}"
+                {{ $articles->category_id == $category->id ? 'selected' : '' }}>
             {{ $category->name }}
             </option>
         @endforeach
@@ -43,16 +43,18 @@
 
 
      <div class=" form-group mb-4">
-        <label for="exampleInputFile">Image</label>
+        <label for="exampleInputFile">Image</label><br>
+
+        <img src="{{ url('./images/'.$articles->image) }}" width="300px" height="270px" style="border-radius: 10px; border:1px solid gray" alt=""><br><br>
            
         <div class="custom-file">
-            <input type="file" class="form-control " name="image" placeholder="choose image" id="customFile">
+            <input type="file" class="form-control " name="image" placeholder="choose image" value="{{ old('$article->image',$articles->image) }}" id="customFile"{{ $articles->image ? $articles->image : 'required' }}>
         </div>
     </div>   
 
     <input type="submit" value="Add Article" 
     class="btn btn-primary">
-    <a href="/articles" class="btn btn-secondary">Back</a>
+    <a href="/articles" class="btn btn-warning">Back</a>
     </form>
  </div>
 @endsection

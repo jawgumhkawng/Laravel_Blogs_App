@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use auth;
+use App\Models\User;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -14,6 +15,18 @@ class CommentController extends Controller
         $this->middleware('auth');
     }
     public function create(){
+
+          $validator = validator(request()->all(), [
+                'content' => 'required',
+              
+                ]);
+        if($validator->fails()) {
+
+            return back()->withErrors($validator);
+
+          }
+        
+      
         $comment = new Comment;
         $comment->content = request()->content;
         $comment->article_id = request()->article_id;

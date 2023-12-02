@@ -16,18 +16,18 @@ class UserController extends Controller
         return view('/profile', compact('user'));
     }
 
-    public function upload($id)
+    public function upload(User $user)
     {
        
         $id = Auth::user()->id;
          $user = User::find($id);
 
-        $validator = validator(request(), [
-    
+          $validator = validator(request()->all(), [
+               
                 'image' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+                
                 ]);
 
-                
         if($validator->fails()) {
 
             return back()->withErrors($validator);

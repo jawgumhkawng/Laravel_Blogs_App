@@ -98,9 +98,9 @@
         </thead>
         <tbody>
             
-            @foreach ($categories as  $category)
+            @foreach ($categories as $key =>  $category)
             <tr>
-                <td width="20%">{{ $category->id  }}</td>
+                <td width="20%">{{ $key + 1 }}</td>
                 <td width="20%">{{ $category->name }}</td>
                 <td width="30%">{{ $category->desc }}</td>
                 <td width="30%">{{ $category->created_at }}</td>
@@ -128,9 +128,10 @@
         </thead>
         <tbody>
             
-            @foreach ($articles as  $article)
+            @forelse ($articles as $key => $article)
+
             <tr>
-                <td>{{ $article->id  }}</td>
+                <td>{{ $key + 1  }}</td>
                 <td>{{ $article->title }}</td>
                 <td>{{ substr($article->body,0,60) }}</td>
                 <td>
@@ -161,7 +162,13 @@
             </tr>
             
            
-             @endforeach
+             @empty
+
+             <tr>
+              <h4 class="text-center text-bold text-danger ">There is no articles yet!</h4>
+             </tr>
+              
+            @endforelse 
              
         </tbody>
     </table>
@@ -179,9 +186,9 @@
         </thead>
         <tbody>
             
-            @foreach ($users as  $user)
+            @foreach ($users as $key =>  $user)
             <tr>
-                <td width="20%">{{ $user->id  }}</td>
+                <td width="20%">{{ $key + 1  }}</td>
                 <td width="20%">{{ $user->name }}</td>
                 <td width="30%">{{ $user->email }}</td>
                 <td width="30%">{{ $user->created_at }}</td>

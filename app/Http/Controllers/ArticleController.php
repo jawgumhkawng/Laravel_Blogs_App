@@ -20,10 +20,16 @@ class ArticleController extends Controller
     public function index()
     {   
         $articles = Article::latest()->paginate(5);
-        $id = Auth::user()->id;
-        $user = User::find($id);
+         if(Auth::user()){
+            $id = Auth::user()->id;
+            $user = User::find($id);
+         
         
         return view('/articles.index',compact('articles','user'));
+
+        } else {
+            return view('/articles.index',compact('articles')); 
+        }
     }
 
     public function detail($id)
@@ -75,6 +81,59 @@ class ArticleController extends Controller
 
         return redirect('/articles')->with('Created', 'Article Created Successfully!');
 
+    }
+
+    public function edit($id)
+    {
+        $articles = Article::find($id);
+        $categories = Category::all();
+
+        return view('/articles.edit', compact('articles', 'categories'));
+    }
+
+    public function update($id)
+    {
+
+         $validator = validator(request()->all(), [
+                'title' => 'required',
+                'body' => 'required',
+                'category_id' => 'required',
+               
+                ]);
+      
+
+        $article = Article::find($id);
+        $article->title = request()->title;
+        $article->body = request()->body;
+        $article->user_id = auth()->user()->id;
+        $article->category_id = request()->category_id;
+
+    //    if(request()->hasfile('image')){
+    //      $imageName = date('YmdHis'). "." .request()->image->getClientOriginalExtension();
+    //     request()->image->move(public_path('images'), $imageName);
+
+    //     $article->image = $imageName;
+    //    }
+       
+        if(request()->image){
+            $image = request()->file('image');
+            $imageName = date('YmdHis').".".$image->getClientOriginalExtension();
+            $image->move(public_path('/images'), $imageName);
+
+            $article->image = $imageName;
+       
+           
+        }
+
+          if($validator->fails()) {
+
+            return back()->withErrors($validator);
+
+          }
+      
+         $article->save();
+
+        return redirect('/articles')->with('Updated', 'Article update Successfully!');
     }
 
     public function delete($id)

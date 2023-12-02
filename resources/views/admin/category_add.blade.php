@@ -51,7 +51,8 @@
         </div>
     @endif
 
-    <form method="post" enctype="multipart/form-data">
+    <button class=" mt-3 btn btn-info text-white " >Add Category</button>
+    <form method="post" enctype="multipart/form-data" class="mt-5">
      @csrf
 
     
