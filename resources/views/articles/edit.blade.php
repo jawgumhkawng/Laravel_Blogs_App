@@ -52,9 +52,9 @@
         </div>
     </div>   
 
-    <input type="submit" value="Add Article" 
+    <input type="submit" value="Update" 
     class="btn btn-primary">
-    <a href="/articles" class="btn btn-warning">Back</a>
+    <a href="/articles" class="btn btn-secondary">Back</a>
     </form>
  </div>
 @endsection

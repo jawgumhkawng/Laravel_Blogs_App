@@ -38,9 +38,21 @@
                 
                 <h5 class="card-title">{{ $articles->title }}</h5>
                   <div class="text-muted small" style="cursor:pointer;">
-                    <b class="text-success">{{ $articles->user->name}}</b><br>
-                    <b >Category : </b> <span class="text-primary" > {{ $articles->category->name }}</span> |
-                    <b >Comments : </b> <span class="text-primary" > {{ count( $articles->comments) }}</span> |
+                    <b class="text-success">By : {{ $articles->user->name}}</b><br>
+
+                     @if($articles->category->id == 1)
+                     <b>Category : </b><span class="btn btn-sm btn-success p-0 px-1 m-0 text-white" > {{ $articles->category->name }}</span> |
+                    @elseif($articles->category->id == 2) 
+                    <b>Category : </b><span class="btn btn-sm btn-info p-0 px-1 m-0 text-white" > {{ $articles->category->name }}</span> |
+                    @elseif($articles->category->id == 3)
+                    <b>Category : </b><span class="btn btn-sm btn-secondary p-0 px-1 m-0 text-white" > {{ $articles->category->name }}</span> |
+                    @elseif($articles->category->id == 4)
+                    <b>Category : </b><span class="btn btn-sm btn-primary p-0 px-1 m-0 text-white" > {{ $articles->category->name }}</span> |
+                    @else
+                    <b>Category : </b><span class="btn btn-sm btn-warning p-0 px-1 m-0 text-white" > {{ $articles->category->name }}</span> |
+                    @endif
+                   
+                    <b >Comments : </b> <b class="text-primary" > {{ count( $articles->comments) }}</b> |
                     <span class="text-muted">{{ $articles->created_at->diffForHumans() }}...</span>
                 </div>
                 
@@ -49,11 +61,11 @@
 
                     <p class="card-text">{{ $articles->body }}</p><br>
 
-                    <a href="{{ url("/articles") }}" class="btn btn-warning">Back  </a>
+                    <a href="{{ url("/articles") }}" title="Back" class="btn btn-secondary px-3"><i class="fa-solid fa-circle-left"></i>  </a>
                     @auth
                     @can("article-delete", $articles)
-                        <a href="{{ url("/articles/edit/$articles->id") }}" class="btn btn-primary  text-decoration-none shadow">Edit</a>
-                      <a href="{{ url("/articles/delete/$articles->id") }}" onclick="return confirm('Are you sure, you want to DELETE this Article {{ $articles->title }}?')" class="btn btn-danger">Delete  </a>
+                        <a href="{{ url("/articles/edit/$articles->id") }}" title="Edit" class="btn  btn-warning px-3"><i class="fa-solid fa-gear"></i></a>
+                      <a href="{{ url("/articles/delete/$articles->id") }}" title="Delete" onclick="return confirm('Are you sure, you want to DELETE this Article {{ $articles->title }}?')" class="btn  btn-danger px-3"><i class="fa-solid fa-trash"></i> </a>
                     @endcan
                     @endauth
 
@@ -77,7 +89,13 @@
             @endcan
             - {{ $comment->content }}
             <div class="small mt-2">
-           <img src="{{ url('./images/'.$comment->user->image) }}" alt="" width="26px" height="26px" style="border: 1px solid grey"  class="rounded-circle  "><b class="ms-2 text-info"> {{ $comment->user->name }}</b>,
+           @if ($comment->user->image)
+               <img src="{{ url('./images/'.$comment->user->image) }}" alt="" width="26px" height="26px" style="border: 1px solid grey"  class="rounded-circle  "><b class="ms-1 text-success"> {{ $comment->user->name }}</b>,
+           @else
+
+           <img src="{{ url('./images/fake_profile.jpg') }}" alt="" width="26px" height="26px" style="border: 1px solid grey"  class="rounded-circle  "><b class="ms-1 text-success"> {{ $comment->user->name }}</b>,
+
+           @endif
             <span class="text-muted text-sm">{{ $comment->created_at->diffForHumans() }}</span>
             </div>
         </li>
@@ -101,7 +119,7 @@
         <input type="hidden" name="article_id" value="{{ $articles->id }}">
         <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
         <textarea type="text"  name="content" placeholder="New Comment" class="form-control mb-2 bg-derk " required></textarea>
-        <input type="submit" value="Add Comment" class="btn btn-secondary" name="" id="">
+        <input type="submit" value="Add Comment" class="btn btn-primary" name="" id="">
         
         </form>
     @endauth

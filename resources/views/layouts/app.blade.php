@@ -24,14 +24,22 @@
     <style>
     @media (min-width: 576px) {
     .img img {
-        width: 190px;
+        width: 220px;
         float: right;
-        height: 190px; 
+        height: 220px; 
     }
    
+    .article-image img {
+        height:280px;
+    }
+   
+    }
   
-    }
-   
+      @media (min-width: 1200px) {
+         .article-image img {
+           height:330px;
+        }
+      }
     /* .bg-derk {
         background: linear-gradient(to top right, #000, #1c1917);
     } */
@@ -44,9 +52,9 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white  bg-derk shadow-sm " style="position: sticky; top:0px; z-index:4">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <b class="text-primary">jaw</b><b>{{ config('app.name', 'Laravel') }}</b>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -54,7 +62,7 @@
                     <!-- Left Side Of Navbar -->
                    @auth
                     <ul class="navbar-nav me-auto">
-                        <a href="{{ url("/articles/add") }}" class="btn btn-info"  data-toggle="tooltip" title="Hooray!"> Add New</a>
+                        <a href="{{ url("/articles/add") }}" title="Add Article" class="btn btn-sm btn-outline-primary"  data-toggle="tooltip" title="Hooray!"><i class="fa-solid fa-plus"></i> &nbsp;&nbsp; Add New</a>
                     </ul>
                     
                    @endauth
@@ -64,39 +72,52 @@
                     </ul>
                     @endguest
                   
+                    @auth
+                        
+                    <ul class="navbar-nav mt-3 mb-3 mt-lg-0 mb-lg-0">
+                         <div class="">
+                            <form class="d-flex" role="search" method="get">
+                                @csrf
+                            <input class="form-control " name="key" value="" type="search" style="border-bottom-right-radius: 0px; border-top-right-radius: 0px" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-sm btn-outline-primary" title="Search" style="border-bottom-left-radius: 0px; border-top-left-radius: 0px" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </form>
+                        </div>
+                    </ul>
+
+                    @endauth
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link btn btn-sm btn-primary py-1 px-2 active text-white me-lg-2 mb-1mb-lg-0 mt-2 mt-lg-0" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link btn btn-sm btn-primary py-1 px-2 active text-white" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                             
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <li class="nav-item dropdown ">
+                                {{-- <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
-                                </a>
+                                </a> --}}
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                {{-- <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"> --}}
+                                    <a class="btn btn-sm btn-outline-primary" title="Logout" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Logout') }}&nbsp; &nbsp;<i class="fa-solid fa-right-from-bracket"></i>
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
-                                </div>
+                                {{-- </div> --}}
                             </li>
                         @endguest
                     </ul>
@@ -106,7 +127,14 @@
 
         <main class="py-4">
             @yield('content')
+            
         </main>
+        
+        <footer>
+            <div class="">
+                <h6 class="text-center text-muted">Copy Right <b class="text-danger">&copy;2023</b> All Right Reserved by <b class="text-primary">mr.jaw</b></h6>
+            </div>
+        </footer>
     </div>
 <script>
     const exampleModal = document.getElementById('exampleModal')

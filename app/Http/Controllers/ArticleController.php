@@ -17,9 +17,30 @@ class ArticleController extends Controller
         $this->middleware('auth')->except(['index', 'detail']);
     }
    
-    public function index()
+    public function index(Request $request)
     {   
-        $articles = Article::latest()->paginate(5);
+       if(isset($request->key))
+       {
+        $key = $request->key;
+            $articles = Article::where(function($query) use ($key) {
+            $query->where('title', 'like', '%' . $key .'%');
+           
+        })->latest()->paginate(12);
+        
+         if(Auth::user()){
+            $id = Auth::user()->id;
+            $user = User::find($id);
+         
+        
+        return view('/articles.index',compact('articles','user'))->with('Deleted','Article Deleted!');
+
+        } else {
+            return view('/articles.index',compact('articles'))->with('Deleted','Article Deleted!');
+        }
+       }
+       else
+       {
+         $articles = Article::latest()->paginate(6);
          if(Auth::user()){
             $id = Auth::user()->id;
             $user = User::find($id);
@@ -30,6 +51,7 @@ class ArticleController extends Controller
         } else {
             return view('/articles.index',compact('articles')); 
         }
+       }
     }
 
     public function detail($id)
