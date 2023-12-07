@@ -1,9 +1,9 @@
 
-*This app is built
--using **laravel 10**
--**Bootstrap**
+*This app is built using **laravel 10**,**Bootstrap5**
 
-## A rough Showcase of website
+## This is a Blog website
+
+## You can create post,comment and search.
  
 
 
