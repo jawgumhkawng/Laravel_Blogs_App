@@ -6,9 +6,16 @@
 ## You can create post,comment and search.
 
 ## A rough Showcase Of My jawBlog Website
+*Index Page :
 <img src="https://github.com/jawgumhkawng/Laravel_Blogs_App/blob/main/public/images/index.png" width="800px" height="470px">
 <br>
 
+*Index Page (login) :
+<img src="https://github.com/jawgumhkawng/Laravel_Blogs_App/blob/main/public/images/index_login.png" width="800px" height="470px">
+<br>
+
+*Detail Page :
+<img src="https://github.com/jawgumhkawng/Laravel_Blogs_App/blob/main/public/images/detail.png" width="800px" height="470px">
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
