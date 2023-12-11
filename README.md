@@ -6,7 +6,7 @@
 ## You can create post,comment and search.
 
 ## A rough Showcase Of My jawBlog Website
-<img src="https://github.com/jawgumhkawng/Laravel_Blogs_App/blob/master/public/images/index.png" width="600px" height="550px">
+<img src="https://github.com/jawgumhkawng/Laravel_Blogs_App/blob/main/public/images/index.png" width="700px" height="570px">
 <br>
 
 
