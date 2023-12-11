@@ -224,3 +224,5 @@
 </body>
 
 </html>
+{{-- <img src="https://github.com/HtetPhone/eCom/blob/master/public/images/home.png" width="450px" height="700px">
+<br> --}}
