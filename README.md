@@ -11,7 +11,7 @@
 <br>
 
 *Index Page (login) :
-<img src="https://github.com/jawgumhkawng/Laravel_Blogs_App/blob/main/public/images/index_login.png" width="800px" height="470px">
+<img src="https://github.com/jawgumhkawng/Laravel_Blogs_App/blob/main/public/images/login_index.png" width="800px" height="470px">
 <br>
 
 *Detail Page :
