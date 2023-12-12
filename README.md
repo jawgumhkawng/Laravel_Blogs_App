@@ -14,7 +14,7 @@
 <img src="https://github.com/jawgumhkawng/Laravel_Blogs_App/blob/main/public/images/login_index.png" width="800px" height="470px">
 <br>
 
-*Detail Page :
+*Profile Image :
 <img src="https://github.com/jawgumhkawng/Laravel_Blogs_App/blob/main/public/images/profile.png" width="800px" height="470px">
 <br>
 *Detail Page :
