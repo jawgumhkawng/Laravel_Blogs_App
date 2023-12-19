@@ -5,22 +5,22 @@
 
 ## You can create post,comment and search.
 
-#Simple Blog website using laravel with default authentication. This website contains blog CRUD , search , comment section and user profile.
+*Simple Blog website using laravel with default authentication. This website contains blog CRUD , search , comment section and user profile.
 
 ## A rough Showcase Of My jawBlog Website
-<h4>Index Page</h4> :<br>
+<h4>Index Page :</h4> <br>
 <img src="https://github.com/jawgumhkawng/Laravel_Blogs_App/blob/main/public/images/index.png" width="800px" height="470px">
 <br>
 
-<h4>Index Page (login)</h4> :<br>
+<h4>Index Page (login) :</h4> <br>
 <img src="https://github.com/jawgumhkawng/Laravel_Blogs_App/blob/main/public/images/login_index.png" width="800px" height="470px">
 <br>
 
-<h4>Profile </h4> :<br>
+<h4>Profile :</h4> <br>
 <img src="https://github.com/jawgumhkawng/Laravel_Blogs_App/blob/main/public/images/profile.png" width="800px" height="470px">
 <br>
 
-<h4>Detail Page </h4>:,br>
+<h4>Detail Page :</h4><br>
 <img src="https://github.com/jawgumhkawng/Laravel_Blogs_App/blob/main/public/images/detail.png" width="800px" height="470px">
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
