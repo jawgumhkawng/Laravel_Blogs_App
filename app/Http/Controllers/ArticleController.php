@@ -72,7 +72,7 @@ class ArticleController extends Controller
     public function create()
     {
         $validator = validator(request()->all(), [
-            'title' => 'required',
+            'title' => 'required|min:5|max:25',
             'body' => 'required',
             'category_id' => 'required',
             'image' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',

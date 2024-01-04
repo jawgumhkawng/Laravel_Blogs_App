@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Helpers\ResponseHelper;
+use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +21,4 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::get('test', function () {
-    return response()->json(['key' => 'hello'], 200);
-});
+Route::post('register', [AuthController::class, 'register']);
