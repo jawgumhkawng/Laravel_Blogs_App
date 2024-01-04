@@ -8,6 +8,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ArticleCreateRequest;
 
 class ArticleController extends Controller
@@ -22,7 +23,8 @@ class ArticleController extends Controller
         if (isset($request->key)) {
             $key = $request->key;
             $articles = Article::where(function ($query) use ($key) {
-                $query->where('title', 'like', '%' . $key . '%');
+                $query->where('title', 'like', '%' . $key . '%')
+                    ->orWhere('body', 'like', '%' . $key . '%');
             })->latest()->paginate(6);
 
             if (Auth::user()) {
@@ -135,6 +137,8 @@ class ArticleController extends Controller
 
             $article->image = $imageName;
         }
+
+
 
         if ($validator->fails()) {
 
