@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 
@@ -24,6 +25,9 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return $user;
+        $token = $user->createToken('blogApp')->accessToken;
+        return ResponseHelper::success([
+            'access_token' => $token,
+        ]);
     }
 }
