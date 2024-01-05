@@ -5,7 +5,7 @@
 
 ## You can create post,comment and search.
 
-*Simple Blog website using laravel with default authentication. This website contains blog CRUD , search , comment section and user profile.
+*Simple Blog website using laravel with default authentication. This website contains blog CRUD , search , comment section , user profile and admin pannel.
 
 ## A rough Showcase Of My jawBlog Website
 <h4>Index Page :</h4> <br>
