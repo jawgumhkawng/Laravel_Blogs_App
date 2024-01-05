@@ -22,6 +22,9 @@
 
 <h4>Detail Page :</h4><br>
 <img src="https://github.com/jawgumhkawng/Laravel_Blogs_App/blob/main/public/images/detail.png" width="800px" height="470px">
+<br>
+<h4>Admin Page :</h4><br>
+<img src="https://github.com/jawgumhkawng/Laravel_Blogs_App/blob/main/public/images/admin.png" width="800px" height="470px">
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
