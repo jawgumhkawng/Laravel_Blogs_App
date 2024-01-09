@@ -100,7 +100,7 @@
                     <thead class="table-light">
                         <tr>
                             <th width="20%">No</th>
-                            <th width="20%">Nmae</th>
+                            <th width="20%">Name</th>
                             <th width="30%">des</th>
                             <th width="30%">created_at</th>
                         </tr>
@@ -128,7 +128,7 @@
                     <thead class="table-light">
                         <tr>
                             <th>No</th>
-                            <th>Nmae</th>
+                            <th>Name</th>
                             <th>des</th>
                             <th>category</th>
                             <th>created_at</th>
@@ -186,7 +186,7 @@
                     <thead class="table-light">
                         <tr>
                             <th width="20%">No</th>
-                            <th width="20%">Nmae</th>
+                            <th width="20%">Name</th>
                             <th width="30%">des</th>
                             <th width="30%">created_at</th>
                         </tr>

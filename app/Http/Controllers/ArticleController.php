@@ -154,10 +154,10 @@ class ArticleController extends Controller
     {
         $articles = Article::find($id);
 
-        if (Gate::denies('article-delete', $articles)) {
+        // if (Gate::denies('article-delete', $articles)) {
 
-            return view()->with('Auth', 'Unauthorize');
-        }
+        //     return view()->with('Auth', 'Unauthorize');
+        // }
 
         $articles->delete();
 
