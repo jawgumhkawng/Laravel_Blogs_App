@@ -30,7 +30,7 @@
                                         style="border: 2px solid gray; height:220px; width:220px" alt="..."><br>
                                 @else
                                     <p class="text-muted mt-3">Set Your Profile Image!</p>
-                                    <form action="{{ route('articles.upload') }}" method="post" class="form-control mt-5"
+                                    <form action="{{ route('users.upload') }}" method="post" class="form-control mt-5"
                                         enctype="multipart/form-data">
                                         @csrf
                                         <input type="hidden" value="{{ $user->id }}">
@@ -91,7 +91,7 @@
                 <div class="row">
 
                     @forelse($articles as $key => $article)
-                        <div class="col-lg-4 col-md-6 col-12 mb-lg-4 mb-4 items-center" style="">
+                        <div class="col-lg-4 col-md-6 col-12 mb-lg-4 mb-4 items-center" id="card" style="">
                             <a href='{{ url("/articles/detail/$article->id") }}' style="text-decoration:none;">
                                 <div class="card shadow article-image" style="width: 100%;">
                                     <img src="{{ url('./images/' . $article->image) }}" class="card-img-top "

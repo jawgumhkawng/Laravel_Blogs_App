@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ArticleCreateRequest;
+use PhpParser\Node\Stmt\TryCatch;
 
 class ArticleController extends Controller
 {
@@ -71,31 +72,35 @@ class ArticleController extends Controller
 
     public function create()
     {
-        $validator = validator(request()->all(), [
-            'title' => 'required|min:5|max:25',
-            'body' => 'required',
-            'category_id' => 'required',
-            'image' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
-        ]);
-        if ($validator->fails()) {
+        try {
+            $validator = validator(request()->all(), [
+                'title' => 'required|min:5|max:25',
+                'body' => 'required',
+                'category_id' => 'required',
+                'image' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+            ]);
+            if ($validator->fails()) {
 
-            return back()->withErrors($validator);
+                return back()->withErrors($validator);
+            }
+
+            $article = new Article;
+            $article->title = request()->title;
+            $article->body = request()->body;
+            $article->user_id = auth()->user()->id;
+            $article->category_id = request()->category_id;
+
+            $imageName = date('YmdHis') . "." . request()->image->getClientOriginalExtension();
+            request()->image->move(public_path('images'), $imageName);
+
+            $article->image = $imageName;
+
+            $article->save();
+
+            return redirect('/articles')->with('Created', 'Article Created Successfully!');
+        } catch (\Exception $e) {
+            return $e->getMessage();
         }
-
-        $article = new Article;
-        $article->title = request()->title;
-        $article->body = request()->body;
-        $article->user_id = auth()->user()->id;
-        $article->category_id = request()->category_id;
-
-        $imageName = date('YmdHis') . "." . request()->image->getClientOriginalExtension();
-        request()->image->move(public_path('images'), $imageName);
-
-        $article->image = $imageName;
-
-        $article->save();
-
-        return redirect('/articles')->with('Created', 'Article Created Successfully!');
     }
 
     public function edit($id)
@@ -108,46 +113,49 @@ class ArticleController extends Controller
 
     public function update($id)
     {
+        try {
+            $validator = validator(request()->all(), [
+                'title' => 'required',
+                'body' => 'required',
+                'category_id' => 'required',
 
-        $validator = validator(request()->all(), [
-            'title' => 'required',
-            'body' => 'required',
-            'category_id' => 'required',
-
-        ]);
+            ]);
 
 
-        $article = Article::find($id);
-        $article->title = request()->title;
-        $article->body = request()->body;
-        $article->user_id = auth()->user()->id;
-        $article->category_id = request()->category_id;
+            $article = Article::find($id);
+            $article->title = request()->title;
+            $article->body = request()->body;
+            $article->user_id = auth()->user()->id;
+            $article->category_id = request()->category_id;
 
-        //    if(request()->hasfile('image')){
-        //      $imageName = date('YmdHis'). "." .request()->image->getClientOriginalExtension();
-        //     request()->image->move(public_path('images'), $imageName);
+            //    if(request()->hasfile('image')){
+            //      $imageName = date('YmdHis'). "." .request()->image->getClientOriginalExtension();
+            //     request()->image->move(public_path('images'), $imageName);
 
-        //     $article->image = $imageName;
-        //    }
+            //     $article->image = $imageName;
+            //    }
 
-        if (request()->image) {
-            $image = request()->file('image');
-            $imageName = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move(public_path('/images'), $imageName);
+            if (request()->image) {
+                $image = request()->file('image');
+                $imageName = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                $image->move(public_path('/images'), $imageName);
 
-            $article->image = $imageName;
+                $article->image = $imageName;
+            }
+
+
+
+            if ($validator->fails()) {
+
+                return back()->withErrors($validator);
+            }
+
+            $article->save();
+
+            return redirect('/articles')->with('Updated', 'Article update Successfully!');
+        } catch (\Exception $e) {
+            return $e->getMessage();
         }
-
-
-
-        if ($validator->fails()) {
-
-            return back()->withErrors($validator);
-        }
-
-        $article->save();
-
-        return redirect('/articles')->with('Updated', 'Article update Successfully!');
     }
 
     public function delete($id)

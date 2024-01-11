@@ -25,6 +25,12 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
     <style>
+        #card:hover {
+            bottom: 2px;
+            position: relative;
+            transition: all 5s ease;
+        }
+
         @media (min-width: 576px) {
             .img img {
                 width: 220px;

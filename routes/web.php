@@ -39,7 +39,7 @@ Route::get('/comments/delete/{id}', [CommentController::class, 'delete']);
 Route::get('/admin/category_add', [CategoryController::class, 'add']);
 Route::post('/admin/category_add', [CategoryController::class, 'create']);
 
-Route::post('/articles', [UserController::class, 'upload'])->name('articles.upload');
+Route::post('/articles', [UserController::class, 'upload'])->name('users.upload');
 
 Auth::routes();
 
