@@ -35,5 +35,7 @@ Route::middleware(['auth:api'])->group(function () {
 
     Route::post('articles/create', [ArticleController::class, 'create']);
 
+    Route::get('articles', [ArticleController::class, 'index']);
+
     Route::get('articles/detail/{id}', [ArticleController::class, 'detail']);
 });

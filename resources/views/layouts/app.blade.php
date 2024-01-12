@@ -86,7 +86,22 @@
                                 title="Hooray!">Hello {{ Request::segment(1) == 'admin' ? 'Admin' : 'User' }}</a>
                         </ul>
                     @endguest
+                    @auth
+                        <div class="dropdown me-2  {{ Request::segment(2) == 'detail' ? 'd-none' : '' }}" style="">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Category
+                            </button>
 
+                            <ul class="dropdown-menu ">
+                                @foreach ($categories as $category)
+                                    <li style="cursor:pointer;" class=""><a class="dropdown-item "
+                                            value="{{ request('keyC', $category->id) }}">{{ $category->name }}</a></li>
+                                @endforeach
+                            </ul>
+
+                        </div>
+                    @endauth
                     @auth
 
                         <ul class="navbar-nav mt-3 mb-3 mt-lg-0 mb-lg-0">

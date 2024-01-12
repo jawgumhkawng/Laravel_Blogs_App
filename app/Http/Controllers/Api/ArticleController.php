@@ -7,9 +7,27 @@ use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ArticleResource;
 
 class ArticleController extends Controller
 {
+
+    public function index(Request $request)
+    {
+        if (isset($request->key)) {
+            $key = $request->key;
+            $articles = Article::where(function ($query) use ($key) {
+                $query->where('title', 'like', '%' . $key . '%')
+                    ->orWhere('body', 'like', '%' . $key . '%');
+            })->latest()->paginate(6);
+
+            return ArticleResource::collection($articles)->additional(['message' => 'success']);
+        } else {
+            $articles = Article::latest()->paginate(6);
+
+            return ArticleResource::collection($articles)->additional(['message' => 'success']);
+        }
+    }
     public function create(Request $request)
     {
         $request->validate(

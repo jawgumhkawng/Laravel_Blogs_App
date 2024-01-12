@@ -23,6 +23,7 @@ class ArticleController extends Controller
     {
         if (isset($request->key)) {
             $key = $request->key;
+            $categories = Category::All();
             $articles = Article::where(function ($query) use ($key) {
                 $query->where('title', 'like', '%' . $key . '%')
                     ->orWhere('body', 'like', '%' . $key . '%');
@@ -33,30 +34,33 @@ class ArticleController extends Controller
                 $user = User::find($id);
 
 
-                return view('/articles.index', compact('articles', 'user'))->with('Deleted', 'Article Deleted!');
+                return view('/articles.index', compact('articles', 'user', 'categories'))->with('Deleted', 'Article Deleted!');
             } else {
-                return view('/articles.index', compact('articles'))->with('Deleted', 'Article Deleted!');
+                return view('/articles.index', compact('articles', 'categories'))->with('Deleted', 'Article Deleted!');
             }
         } else {
             $articles = Article::latest()->paginate(6);
+            $categories = Category::All();
             if (Auth::user()) {
                 $id = Auth::user()->id;
                 $user = User::find($id);
 
 
-                return view('/articles.index', compact('articles', 'user'));
+                return view('/articles.index', compact('articles', 'user', 'categories'));
             } else {
-                return view('/articles.index', compact('articles'));
+                return view('/articles.index', compact('articles', 'categories'));
             }
         }
     }
 
     public function detail($id)
     {
+        $categories = Category::All();
         $data = Article::find($id);
 
         return view('/articles.detail', [
-            'articles' => $data
+            'articles' => $data,
+            'categories' => $categories,
         ]);
     }
 
