@@ -28,14 +28,19 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware(['auth:api'])->group(function () {
-    Route::get('profile', [ProfileController::class, 'profile']);
-    Route::post('logout', [AuthController::class, 'logout']);
 
+    Route::post('logout', [AuthController::class, 'logout']);
+    //profile
+    Route::get('profile', [ProfileController::class, 'profile']);
+    Route::get('profile_post', [ProfileController::class, 'posts']);
+
+
+    //category
     Route::get('categories', [CategoryController::class, 'index']);
 
+    //article
     Route::post('articles/create', [ArticleController::class, 'create']);
-
     Route::get('articles', [ArticleController::class, 'index']);
-
     Route::get('articles/detail/{id}', [ArticleController::class, 'detail']);
+    Route::post('articles/delete/{id}', [ArticleController::class, 'delete']);
 });

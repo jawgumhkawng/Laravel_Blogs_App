@@ -2,12 +2,11 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Support\Str;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ArticleResource extends JsonResource
+class ArticleDetailResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,7 +18,7 @@ class ArticleResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'body' => Str::limit($this->body, 60),
+            'body' => $this->body,
             'category_name' => optional($this->category)->name ?? 'Unknown Category',
             'author' => optional($this->user)->name ?? 'Unknown User',
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s A'),

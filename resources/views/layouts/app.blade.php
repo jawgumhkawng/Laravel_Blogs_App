@@ -95,8 +95,9 @@
 
                             <ul class="dropdown-menu ">
                                 @foreach ($categories as $category)
-                                    <li style="cursor:pointer;" class=""><a class="dropdown-item "
-                                            value="{{ request('keyC', $category->id) }}">{{ $category->name }}</a></li>
+                                    <li style="cursor:pointer;" class=""><a
+                                            class="dropdown-item "href="{{ $category->id }}"
+                                            value="{{ $category->id }}">{{ $category->name }}</a></li>
                                 @endforeach
                             </ul>
 

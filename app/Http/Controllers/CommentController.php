@@ -14,28 +14,27 @@ class CommentController extends Controller
     {
         $this->middleware('auth');
     }
-    public function create(){
+    public function create()
+    {
 
-          $validator = validator(request()->all(), [
-                'content' => 'required',
-              
-                ]);
-        if($validator->fails()) {
+        $validator = validator(request()->all(), [
+            'content' => 'required',
+
+        ]);
+        if ($validator->fails()) {
 
             return back()->withErrors($validator);
+        }
 
-          }
-        
-      
+
         $comment = new Comment;
         $comment->content = request()->content;
         $comment->article_id = request()->article_id;
         $comment->user_id = auth()->user()->id;
-        
+
         $comment->save();
 
         return back()->with('CmtCreate', 'Comment Create Successfully!');
-
     }
 
     public function delete($id)
@@ -50,19 +49,14 @@ class CommentController extends Controller
         //     return back()->with('Auth', 'You Cannot Delete This Comment!');
         // }
 
-        $comment = Comment::find($id);
+        $comment = Comment::with('user')->find($id);
 
-        if(Gate::denies('comment-delete', $comment)) {
+        if (Gate::denies('comment-delete', $comment)) {
 
-        return back()->with('Auth', 'Unauthorize'); 
-
+            return back()->with('Auth', 'Unauthorize');
         }
 
         $comment->delete();
         return back()->with('CmtDel', 'Comment Deleted!');
-
-        
-
-        
     }
 }

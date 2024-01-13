@@ -25,10 +25,10 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {   
+    {
         $users = User::all();
         $categories = Category::all();
-        $articles = Article::all();
-        return view('/admin.index', compact('categories','articles','users'));
+        $articles = Article::with('user', 'category', 'comments')->all();
+        return view('/admin.index', compact('categories', 'articles', 'users'));
     }
 }

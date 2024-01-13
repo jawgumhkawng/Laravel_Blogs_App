@@ -7,6 +7,7 @@ use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ArticleDetailResource;
 use App\Http\Resources\ArticleResource;
 
 class ArticleController extends Controller
@@ -14,19 +15,23 @@ class ArticleController extends Controller
 
     public function index(Request $request)
     {
+        $query = Article::with('user', 'category', 'comments')->orderByDesc('id');
+
         if (isset($request->key)) {
             $key = $request->key;
-            $articles = Article::where(function ($query) use ($key) {
+            $query->where(function ($query) use ($key) {
                 $query->where('title', 'like', '%' . $key . '%')
                     ->orWhere('body', 'like', '%' . $key . '%');
-            })->latest()->paginate(6);
-
-            return ArticleResource::collection($articles)->additional(['message' => 'success']);
-        } else {
-            $articles = Article::latest()->paginate(6);
-
-            return ArticleResource::collection($articles)->additional(['message' => 'success']);
+            });
         }
+        if (isset($request->category->id)) {
+
+            $query->where('category_id', $request->category->id);
+        }
+
+        $articles = $query->latest()->paginate(6);
+
+        return ArticleResource::collection($articles)->additional(['message' => 'success']);
     }
     public function create(Request $request)
     {
@@ -60,9 +65,16 @@ class ArticleController extends Controller
 
     public function detail($id)
     {
-        $articles = Article::find($id);
-        $categories = Category::all();
+        $articles = Article::with('user', 'category', 'comments')->findorfail($id);
+        // $categories = Category::all();
 
-        return ResponseHelper::success($articles);
+        return ResponseHelper::success(new ArticleDetailResource($articles));
+    }
+
+    public function delete($id)
+    {
+        $article = Article::with('user', 'category', 'comments')->findorfail($id)->delete();
+
+        return ResponseHelper::success($article);
     }
 }

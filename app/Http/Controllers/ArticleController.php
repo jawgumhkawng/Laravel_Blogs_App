@@ -21,42 +21,57 @@ class ArticleController extends Controller
 
     public function index(Request $request)
     {
+        $query = Article::with('user', 'category', 'comments')->orderByDesc('id');
+        $categories = Category::All();
         if (isset($request->key)) {
             $key = $request->key;
-            $categories = Category::All();
-            $articles = Article::where(function ($query) use ($key) {
-                $query->where('title', 'like', '%' . $key . '%')
+
+            $query->where(function ($q1) use ($key) {
+                $q1->where('title', 'like', '%' . $key . '%')
                     ->orWhere('body', 'like', '%' . $key . '%');
-            })->latest()->paginate(6);
-
-            if (Auth::user()) {
-                $id = Auth::user()->id;
-                $user = User::find($id);
-
-
-                return view('/articles.index', compact('articles', 'user', 'categories'))->with('Deleted', 'Article Deleted!');
-            } else {
-                return view('/articles.index', compact('articles', 'categories'))->with('Deleted', 'Article Deleted!');
-            }
-        } else {
-            $articles = Article::latest()->paginate(6);
-            $categories = Category::All();
-            if (Auth::user()) {
-                $id = Auth::user()->id;
-                $user = User::find($id);
-
-
-                return view('/articles.index', compact('articles', 'user', 'categories'));
-            } else {
-                return view('/articles.index', compact('articles', 'categories'));
-            }
+            });
         }
+
+        if (isset($request->category->id)) {
+
+            $query->whereHas('category', function ($query) use ($request) {
+
+                $query->where('id', $request->category->id);
+            })->get();
+        }
+
+
+
+        $articles = $query->latest()->paginate(6);
+
+        if (Auth::user()) {
+            $id = Auth::user()->id;
+            $user = User::find($id);
+
+
+            return view('/articles.index', compact('articles', 'user', 'categories'))->with('Deleted', 'Article Deleted!');
+        } else {
+            return view('/articles.index', compact('articles', 'categories'))->with('Deleted', 'Article Deleted!');
+        }
+        // } else {
+        //     $articles = Article::latest()->paginate(6);
+        //     $categories = Category::All();
+        //     if (Auth::user()) {
+        //         $id = Auth::user()->id;
+        //         $user = User::find($id);
+
+
+        //         return view('/articles.index', compact('articles', 'user', 'categories'));
+        //     } else {
+        //         return view('/articles.index', compact('articles', 'categories'));
+        //     }
+        // }
     }
 
     public function detail($id)
     {
         $categories = Category::All();
-        $data = Article::find($id);
+        $data = Article::with('user', 'category', 'comments')->find($id);
 
         return view('/articles.detail', [
             'articles' => $data,
@@ -109,7 +124,7 @@ class ArticleController extends Controller
 
     public function edit($id)
     {
-        $articles = Article::find($id);
+        $articles = Article::with('user', 'category', 'comments')->find($id);
         $categories = Category::all();
 
         return view('/articles.edit', compact('articles', 'categories'));
@@ -126,7 +141,7 @@ class ArticleController extends Controller
             ]);
 
 
-            $article = Article::find($id);
+            $article = Article::with('user', 'category', 'comments')->find($id);
             $article->title = request()->title;
             $article->body = request()->body;
             $article->user_id = auth()->user()->id;
@@ -164,7 +179,7 @@ class ArticleController extends Controller
 
     public function delete($id)
     {
-        $articles = Article::find($id);
+        $articles = Article::with('user', 'category', 'comments')->find($id);
 
         // if (Gate::denies('article-delete', $articles)) {
 
