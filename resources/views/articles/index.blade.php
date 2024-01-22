@@ -123,6 +123,9 @@
                                             <b>Comments : </b> <b class="text-primary">
                                                 {{ count($article->comments) }}</b> |
                                             <span class="text-muted">{{ $article->created_at->diffForHumans() }}...</span>
+                                            |
+                                            <span
+                                                class="text-muted">{{ date('d-m-Y', strtotime($article->created_at)) }}</span>
                                         </div><br>
                                         <p class="card-text ">{{ substr($article->body, 0, 60) }}... </p>
                                     </div>

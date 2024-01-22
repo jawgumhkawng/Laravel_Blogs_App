@@ -56,7 +56,8 @@
                         @endif
 
                         <b>Comments : </b> <b class="text-primary"> {{ count($articles->comments) }}</b> |
-                        <span class="text-muted">{{ $articles->created_at->diffForHumans() }}...</span>
+                        <span class="text-muted">{{ $articles->created_at->diffForHumans() }}...</span> | <span
+                            class="text-muted">{{ date('d-m-Y', strtotime($articles->created_at)) }}</span>
                     </div>
 
                     {{-- <div class="card-subtitle mb-2 text-info small">{{ $articles->created_at->diffForHumans() }},Category: <b>{{ $articles->category->name }}</b> --}}

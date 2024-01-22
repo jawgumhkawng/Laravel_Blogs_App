@@ -19,30 +19,36 @@ class ArticleController extends Controller
         $this->middleware('auth')->except(['index', 'detail']);
     }
 
+
+    // 'blogs' => Blog::with(['category', 'author']) //eager loading
+
     public function index(Request $request)
     {
         $query = Article::with('user', 'category', 'comments')->orderByDesc('id');
         $categories = Category::All();
-        if (isset($request->key)) {
-            $key = $request->key;
+        // if (isset($request->key)) {
+        //     $key = $request->key;
 
-            $query->where(function ($q1) use ($key) {
-                $q1->where('title', 'like', '%' . $key . '%')
-                    ->orWhere('body', 'like', '%' . $key . '%');
-            });
-        }
+        //     $query->where(function ($q1) use ($key) {
+        //         $q1->where('title', 'like', '%' . $key . '%')
+        //             ->orWhere('body', 'like', '%' . $key . '%');
+        //     });
+        // }
 
-        if (isset($request->category->id)) {
+        // if (isset($request->category->id)) {
 
-            $query->whereHas('category', function ($query) use ($request) {
+        //     $query->whereHas('category', function ($query) use ($request) {
 
-                $query->where('id', $request->category->id);
-            })->get();
-        }
+        //         $query->where('id', $request->category->id);
+        //     })->get();
+        // }
 
 
 
-        $articles = $query->latest()->paginate(6);
+        $articles = $query->filter(request(['search', 'category']))
+            ->latest()
+            ->paginate(6)
+            ->withQueryString();
 
         if (Auth::user()) {
             $id = Auth::user()->id;

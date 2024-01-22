@@ -95,9 +95,9 @@
 
                             <ul class="dropdown-menu ">
                                 @foreach ($categories as $category)
-                                    <li style="cursor:pointer;" class=""><a
-                                            class="dropdown-item "href="{{ $category->id }}"
-                                            value="{{ $category->id }}">{{ $category->name }}</a></li>
+                                    <li style="cursor:pointer;" class=""><a class="dropdown-item"
+                                            href="/?category={{ $category->name }}{{ request('search') ? '&search=' . request('search') : '' }}"
+                                            value="{{ request('category') }}">{{ $category->name }}</a></li>
                                 @endforeach
                             </ul>
 
@@ -108,7 +108,7 @@
                         <ul class="navbar-nav mt-3 mb-3 mt-lg-0 mb-lg-0">
                             <div class="{{ Request::segment(2) == 'detail' ? 'd-none' : '' }}">
                                 <form class="d-flex" role="search" method="get">
-                                    <input class="form-control " name="key" value="{{ request('key', '') }}"
+                                    <input class="form-control " name="search" value="{{ request('search') }}"
                                         type="search" style="border-bottom-right-radius: 0px; border-top-right-radius: 0px"
                                         placeholder="Search" aria-label="Search">
                                     <button class="btn btn-sm btn-outline-primary" title="Search"
