@@ -28,7 +28,7 @@ class HomeController extends Controller
     {
         $users = User::all();
         $categories = Category::all();
-        $articles = Article::with('user', 'category', 'comments')->all();
+        $articles = Article::all();
         return view('/admin.index', compact('categories', 'articles', 'users'));
     }
 }
