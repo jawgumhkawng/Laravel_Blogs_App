@@ -3,9 +3,9 @@
 
 ## This is a Blog website
 
-## You can create post,comment and search.
+## You can create post,comment,sort category and search.
 
-*Simple Blog website using laravel with default authentication. This website contains blog CRUD , search , comment section , user profile and admin pannel.
+*Simple Blog website using laravel with default authentication. This website contains blog CRUD , search , category , comment section , user profile and admin pannel.
 
 ## A rough Showcase Of My jawBlog Website
 <h4>Index Page :</h4> <br>
