@@ -57,7 +57,7 @@ class ArticleController extends Controller
 
             return view('/articles.index', compact('articles', 'user', 'categories'))->with('Deleted', 'Article Deleted!');
         } else {
-            return view('/articles.index', compact('articles', 'categories'))->with('Deleted', 'Article Deleted!');
+            return view('/articles.index', compact('articles', 'categories'));
         }
         // } else {
         //     $articles = Article::latest()->paginate(6);

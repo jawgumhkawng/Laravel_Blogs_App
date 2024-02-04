@@ -88,9 +88,9 @@
                     @endguest
                     @auth
                         <div class="dropdown me-2  {{ Request::segment(2) == 'detail' ? 'd-none' : '' }}" style="">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            <button class="btn btn-primary dropdown-toggle px-4" type="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                Category
+                                {{ request('category') ? request('category') : 'Category' }}
                             </button>
 
                             <ul class="dropdown-menu ">
