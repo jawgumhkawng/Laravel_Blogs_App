@@ -43,6 +43,11 @@
                                 <div class="card-body">
                                     <h5 class="card-title h4">Name : {{ $user->name ? $user->name : '' }}</h5>
                                     <p class="card-text">Email : {{ $user->email ? $user->email : '' }}</p>
+                                    <b class="card-text">Post : {{ $user->article()->count() ? $user->article()->count() : '' }}
+                                    </b> |
+                                    <b class="card-text">Comment :
+                                        {{ $user->comment()->count() ? $user->comment()->count() : '' }}
+                                    </b>
                                     {{-- <a href="#" class="btn btn-primary" data-bs-dismiss="modal">Close</a> --}}
                                 </div>
                             </div>
@@ -91,7 +96,7 @@
                 <div class="row">
 
                     @forelse($articles as $key => $article)
-                        <div class="col-lg-4 col-md-6 col-12 mb-lg-4 mb-4 items-center" id="card" style="">
+                        <div class="col-lg-4 col-md-6 col-12 mb-lg-4 mb-4 items-center" id="card">
                             <a href='{{ url("/articles/detail/$article->id") }}' style="text-decoration:none;">
                                 <div class="card shadow article-image" style="width: 100%;">
                                     <img src="{{ url('./images/' . $article->image) }}" class="card-img-top "
