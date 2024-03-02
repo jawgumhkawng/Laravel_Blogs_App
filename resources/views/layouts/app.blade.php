@@ -31,6 +31,8 @@
             transition: all 5s ease;
         }
 
+
+
         @media (min-width: 576px) {
             .img img {
                 width: 220px;
@@ -42,12 +44,15 @@
                 height: 280px;
             }
 
+
         }
 
         @media (min-width: 1200px) {
             .article-image img {
                 height: 330px;
             }
+
+
         }
 
         /* .bg-derk {

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
@@ -36,12 +37,13 @@ Route::get('/articles/delete/{id}', [ArticleController::class, 'delete']);
 Route::post('/comments/add', [CommentController::class, 'create']);
 Route::get('/comments/delete/{id}', [CommentController::class, 'delete']);
 
-Route::get('/admin/category_add', [CategoryController::class, 'add']);
-Route::post('/admin/category_add', [CategoryController::class, 'create']);
+Route::get('/admin/category_add', 'Admin\CategoryController@add');
+Route::post('/admin/category_add', 'Admin\CategoryController@create');
 
 Route::post('/articles', [UserController::class, 'upload'])->name('users.upload');
 
 Auth::routes();
 
 Route::get('/home', [ArticleController::class, 'index']);
-Route::get('/admin', [HomeController::class, 'index']);
+// Route::get('/admin', 'Admin\AdminController@index');
+Route::get('/admin', 'Admin\AdminController@index');

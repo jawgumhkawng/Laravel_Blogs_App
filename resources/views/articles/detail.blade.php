@@ -63,7 +63,7 @@
                     {{-- <div class="card-subtitle mb-2 text-info small">{{ $articles->created_at->diffForHumans() }},Category: <b>{{ $articles->category->name }}</b> --}}
                 </div>
 
-                <p class="card-text col-lg-8">{{ $articles->body }}</p><br>
+                <p class="card-text col-lg-8  ">{{ $articles->body }}</p><br>
 
                 <a href="{{ url('/articles') }}" title="Back" class="btn btn-secondary px-3"><i
                         class="fa-solid fa-circle-left"></i> </a>

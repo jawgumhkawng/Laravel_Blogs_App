@@ -94,7 +94,6 @@
 
             <div class="d-flex mt-3">
                 <div class="row">
-
                     @forelse($articles as $key => $article)
                         <div class="col-lg-4 col-md-6 col-12 mb-lg-4 mb-4 items-center" id="card">
                             <a href='{{ url("/articles/detail/$article->id") }}' style="text-decoration:none;">
@@ -140,7 +139,6 @@
                     @empty
                         <h5 class="fw-bold text-danger mb-4">There is no articles yet</h5>
                     @endforelse
-
                 </div>
             </div>
 

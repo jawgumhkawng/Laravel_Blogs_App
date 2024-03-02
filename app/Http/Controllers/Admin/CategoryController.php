@@ -1,36 +1,35 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
-
-       public function add()
+    public function add()
     {
-        
+
         return view('admin.category_add');
     }
 
-    public function create() 
+    public function create()
     {
-         $validator = validator(request()->all(), [
-                'name' => 'required',
-                'desc' => 'required',
-                
-                ]);
-        if($validator->fails()) {
+        $validator = validator(request()->all(), [
+            'name' => 'required',
+            'desc' => 'required',
+
+        ]);
+        if ($validator->fails()) {
 
             return back()->withErrors($validator);
-
-          }
+        }
 
         $category = new Category;
         $category->name = request()->name;
         $category->desc = request()->desc;
-       
+
         $category->save();
 
         return redirect('/admin')->with('Created', 'Article Created Successfully!');
