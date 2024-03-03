@@ -185,20 +185,24 @@
                 <table class="table">
                     <thead class="table-light">
                         <tr>
-                            <th width="20%">No</th>
+                            <th width="10%">No</th>
                             <th width="20%">Name</th>
-                            <th width="30%">des</th>
-                            <th width="30%">created_at</th>
+                            <th width="30%">Email</th>
+                            <th width="20%">created_at</th>
+                            <th width="20%" class="text-center">option</th>
                         </tr>
                     </thead>
                     <tbody>
 
                         @foreach ($users as $key => $user)
                             <tr>
-                                <td width="20%">{{ $key + 1 }}</td>
+                                <td width="10%">{{ $key + 1 }}</td>
                                 <td width="20%">{{ $user->name }}</td>
                                 <td width="30%">{{ $user->email }}</td>
-                                <td width="30%">{{ $user->created_at }}</td>
+                                <td width="20%">{{ $user->created_at }}</td>
+                                <td width="20%" class="text-center"><a href="#"
+                                        class="btn btn-sm btn-primary px-1 py-0">Admin</a>
+                                </td>
 
                             </tr>
                         @endforeach

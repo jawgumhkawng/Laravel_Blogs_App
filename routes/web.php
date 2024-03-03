@@ -37,13 +37,14 @@ Route::get('/articles/delete/{id}', [ArticleController::class, 'delete']);
 Route::post('/comments/add', [CommentController::class, 'create']);
 Route::get('/comments/delete/{id}', [CommentController::class, 'delete']);
 
-Route::get('/admin/category_add', 'Admin\CategoryController@add');
-Route::post('/admin/category_add', 'Admin\CategoryController@create');
+Route::get('/admin/category_add', [App\Http\Controllers\Admin\CategoryController::class, 'add']);
+Route::post('/admin/category_add', [App\Http\Controllers\Admin\CategoryController::class, 'create']);
+
 
 Route::post('/articles', [UserController::class, 'upload'])->name('users.upload');
 
 Auth::routes();
 
 Route::get('/home', [ArticleController::class, 'index']);
-// Route::get('/admin', 'Admin\AdminController@index');
-Route::get('/admin', 'Admin\AdminController@index');
+
+Route::get('/admin', [AdminController::class, 'index']);

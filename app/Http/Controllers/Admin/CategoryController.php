@@ -17,8 +17,8 @@ class CategoryController extends Controller
     public function create()
     {
         $validator = validator(request()->all(), [
-            'name' => 'required',
-            'desc' => 'required',
+            'name' => 'required|regex:/^[\pL\s\-]+$/u|min:5',
+            'desc' => 'required|regex:/^[\pL\s\-]+$/u|min:5',
 
         ]);
         if ($validator->fails()) {
